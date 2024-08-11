@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-nav .nav-link {
+            color: #333 !important;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #007bff !important;
+        }
+
+        .navbar-brand {
+            color: #007bff !important;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Hero section styling */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            flex-direction: column;
+            transition: background 0.5s ease-in-out;
+        }
+
+        .hero img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 5px solid #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero img:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 1s;
+        }
+
+        .hero a {
+            font-size: 1rem;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            transition: background 0.3s, color 0.3s;
+            margin-top: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .hero a:hover {
+            background: #fff;
+            color: #007bff;
+        }
+
+        /* Section styling */
+        section {
+            padding: 4rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        section.in-viewport {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #007bff;
+            text-transform: uppercase;
+        }
+
+        /* Fade in up animation */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Skills section icons */
+        .skill-icon {
+            font-size: 3rem;
+            color: #007bff;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .skill-icon:hover {
+            transform: scale(1.2);
+            color: #0056b3;
+        }
+
+        /* Flexbox styling */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .col-md-4, .col-md-6 {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        /* Experience and Education cards */
+        .card {
+            border-radius: 10px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .list-group-item {
+            transition: background 0.3s ease;
+        }
+
+        .list-group-item:hover {
+            background-color: #f0f2f5;
+        }
+
+        /* Footer styling */
+        footer {
+            background: #007bff;
+            color: #fff;
+            padding: 1.5rem 0;
+            transition: background 0.5s ease-in-out;
+        }
+
+        footer:hover {
+            background: #0056b3;
+        }
+
+        .test{
+            background-color: red;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="#"><i class="fas fa-home"></i> My Portfolio</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#about"><i class="fas fa-user"></i> About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#experience"><i class="fas fa-briefcase"></i> Experience</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#skills"><i class="fas fa-laptop-code"></i> Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#education"><i class="fas fa-graduation-cap"></i> Education</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#extra-curricular"><i class="fas fa-users"></i> Extra-Curricular</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero d-flex align-items-center text-center">
+        <div class="container">
+            <img src="Hardik_pic.jpg" alt="Profile Picture" class="img-fluid rounded-circle profile-img">
+            <h1 id="welcomeMessage">HARDIK SHAH</h1>
+            <p id="careerObjective">Motivated beginner in Computer Science with a strong interest in learning programming and software development. Currently building foundational skills in Python and Java, and exploring the basics of algorithms and data structures. Excited about technology's potential to solve problems and eager to work on projects that enhance my understanding of coding and computational thinking. Committed to continuous learning and growth in the tech field.</p>
+            <a href="https://rawcdn.githack.com/HPS170405/Synapse-test/0fe9d596b6d7c8aaa90e452eda3933200c8b5877/Hardik_CV.pdf" class="btn" target="_blank">Download My CV</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-light text-dark">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <p id="personalInfo" class="lead text-center">Loading Personal Information...</p>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="row" id="experienceSection">
+                <!-- Experience will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-5 bg-light text-dark">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="row" id="skillsSection">
+                <!-- Skills will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Academic Qualifications</h2>
+            <ul class="list-group" id="educationSection">
+                <!-- Education details will be dynamically added here -->
+            </ul>
+        </div>
+    </section>
+
+    <!-- Extra-Curricular Section -->
+    <section id="extra-curricular" class="py-5 bg-light text-dark">
+        <div class="container">
+            <h2 class="section-title">Extra-Curricular/Social-work Experience</h2>
+            <ul class="list-group" id="extraCurricularSection">
+                <!-- Extra-curricular activities will be dynamically added here -->
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-4">
+        <p>&copy; 2024 My Portfolio. All Rights Reserved.</p>
+    </footer>
+
+    <span class="test">Hardik </span>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        const data = {
+            personalInfo: "Motivated beginner in Computer Science with a strong interest in learning programming and software development. Currently building foundational skills in Python and Java, and exploring the basics of algorithms and data structures. Excited about technology's potential to solve problems and eager to work on projects that enhance my understanding of coding and computational thinking. Committed to continuous learning and growth in the tech field.",
+            experience: [
+                { title: "Software Developer", company: "Tech Solutions", details: "Developed responsive web applications and optimized performance across platforms." },
+                { title: "Intern", company: "CodeWorks", details: "Assisted in backend development and database management." },
+                { title: "Content Writing Intern", company: "Kshitiksha Foundation", details: "Worked as a content writing intern at Kshitiksha Foundation." }
+            ],
+            skills: [
+                { name: "HTML", icon: "fab fa-html5" },
+                { name: "CSS", icon: "fab fa-css3-alt" },
+                { name: "JavaScript", icon: "fab fa-js" },
+                { name: "Bootstrap", icon: "fab fa-bootstrap" },
+                { name: "Python", icon: "fab fa-python" },
+                { name: "Git", icon: "fab fa-git-alt" }
+            ],
+            education: [
+                "BTech in Computer Engineering from DJSCE",
+                "BSc in Data Science and AI from IIT Guwahati"
+            ],
+            extraCurricular: [
+                "Volunteered at the local community center to teach coding to children.",
+                "Organized and participated in hackathons and coding competitions."
+            ]
+        };
+
+        // Load data into the DOM
+        document.getElementById("careerObjective").innerText = data.personalInfo;
+        document.getElementById("personalInfo").innerText = data.personalInfo;
+
+        // Load Experience
+        const experienceSection = document.getElementById("experienceSection");
+        data.experience.forEach(exp => {
+            const expDiv = document.createElement("div");
+            expDiv.className = "col-md-6";
+            expDiv.innerHTML = `
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">${exp.title}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${exp.company}</h6>
+                        <p class="card-text">${exp.details}</p>
+                    </div>
+                </div>
+            `;
+            experienceSection.appendChild(expDiv);
+        });
+
+        // Load Skills
+        const skillsSection = document.getElementById("skillsSection");
+        data.skills.forEach(skill => {
+            const skillDiv = document.createElement("div");
+            skillDiv.className = "col-md-4";
+            skillDiv.innerHTML = `
+                <div class="card mb-3 text-center">
+                    <div class="card-body">
+                        <i class="${skill.icon} skill-icon"></i>
+                        <p class="card-text">${skill.name}</p>
+                    </div>
+                </div>
+            `;
+            skillsSection.appendChild(skillDiv);
+        });
+
+        // Load Education
+        const educationSection = document.getElementById("educationSection");
+        data.education.forEach(edu => {
+            const eduLi = document.createElement("li");
+            eduLi.className = "list-group-item";
+            eduLi.innerText = edu;
+            educationSection.appendChild(eduLi);
+        });
+
+        // Load Extra-curricular activities
+        const extraCurricularSection = document.getElementById("extraCurricularSection");
+        data.extraCurricular.forEach(activity => {
+            const activityLi = document.createElement("li");
+            activityLi.className = "list-group-item";
+            activityLi.innerText = activity;
+            extraCurricularSection.appendChild(activityLi);
+        });
+
+        // Add in-viewport class on scroll
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-viewport');
+                }
+            });
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+
+</html>
